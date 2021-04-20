@@ -1,0 +1,275 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{enumerate}
+%\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage{titlesec}
+\usepackage{xfrac}
+\usepackage{mdframed}
+\usepackage{marginnote}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
+\pagestyle{fancy}
+\rhead{Oscar Martinez}
+\lhead{STA 5106} 					%Insert subject
+\chead{Homework 1} 					%Insert Title
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newmdtheoremenv{Proof}{proof}
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Lagr}{\mathcal{L}}
+\newcommand{\QED}{$ \blacksquare $}
+\newcommand{\LRA}{\Leftrightarrow}
+\newcommand{\LA}{\Leftarrow}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\rsa}{\rightsquigarrow} 
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\at}{a_{t+1}}
+\newcommand{\ct}{c_{t+1}}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator{\Var}{\mathbb{V}}% expected value
+
+\newcommand{\triforce}{\resizebox{1em}{!}{
+		\begin{tikzpicture}
+		\fill[black] (0,0)  -- +(2,0) -- +(60:2) -- cycle;
+		\fill[white]  (60:1) -- +(1,0)  -- (1,0) -- cycle;
+		\end{tikzpicture}
+}}
+
+
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\roman{subsection})}
+\renewcommand{\thesubsubsection}{\roman{subsubsection}.)}
+
+\begin{document}
+	\section{}
+	 Let $A$ be an $n \times n$ real matrix. Prove that if $A$ is symmetric, i.e. $A=A^{T},$ then all eigenvalues of $A$ are real.
+	\medskip
+	\begin{proof}
+		Assume, for a contradiction that $ A $ is a real, symmetric $ n \times n $ matrix and that $ \lambda $ is a complex eigenvalue of $ A $.\\
+		By definition we must have that \begin{equation}
+			Av=\lambda v
+		\end{equation}
+		for eigenvector $ v $ of $ A $. 
+		Premultiplying both sides by $ \overline{v^T} $: \[  \overline{v^T}Av= \overline{v^T}\lambda v= \lambda  \overline{v^T} v \]
+		Now, taking the conjugate yields: \[ \overline{ \overline{v^T} Av } = v^T\overline{A}\overline{v}=\overline{\lambda} v^T \overline{v} = \overline{\lambda \overline{v^T} v} \]
+		Taking the transpose: \[ (v^T\overline{A}\overline{v})^T= \overline{v^T}\overline{A}^Tv= \overline{\lambda}\overline{v^T}v=(\overline{\lambda} v^T \overline{v})^T \]
+		Now as $ A $ is real, symmetric, and through $ (1) $: 
+		\[ \overline{\lambda}\overline{v^T}v = \overline{v^T}\overline{A}^Tv=\overline{v^T}Av = \lambda  \overline{v^T} v \\ \RA \overline{\lambda} = \lambda \] 
+		which is a contradiction unless $ \lambda  $ is real. Conclusively, all eigenvalues of real, symmetric matrices are themselves real.  
+	\end{proof}	 
+		
+	\section{}
+		Through transformation with orthogonal matrix $O$ , the problem $\hat{b}=\arg \min \|y-X b\|^{2}$
+		is equivalent to $\hat{b}=\arg \min \left\|y^{*}-X^{*} b\right\|^{2}$ where $y$ and $y^{*}$ are in $\mathbf{R}^{\mathrm{m}}, X$ and $X^{*}$ are in $\mathbf{R}^{\mathrm{m} \times \mathrm{n}}(\mathrm{m} \geq$
+		$\mathrm{n}),$ and $y^{*}=O y$ and $X^{*}=O X .$ Let $y^{*}=\left[y_{1}^{*}, y_{2}^{*}, \cdots, y_{m}^{*}\right]^{T} .$ If $X^{*}$ is upper-triangular, prove that the
+		residual sum of square is
+		\[ \|y-X \hat{b}\|^{2}=\sum_{i=n+1}^{m}\left|y_{i}^{*}\right|^{2} \]
+		
+		\begin{proof}
+			\begin{align*}
+				\|y-X \hat{b}\|^{2} &= \|I_m y- I_m X \hat{b}\|^{2} \\
+				&= \|O^T O y-O^T O X \hat{b}\|^{2} \\
+				&= \|O^T(y^*-X^* \hat{b})\|^{2} \\
+				&= O^T \left( \begin{bmatrix}
+					y_1^* \\ y_2^* \\ \vdots \\ y_{n-1}^* \\ y_n^* \\ y_{n+1}^* \\ \vdots \\ y_{m}^*
+				\end{bmatrix} - \begin{bmatrix}
+					x_{1,1}^* & x_{1,2}^* & \dots & x_{1,n}^* \\
+					0 & x_{2,2}^* & \dots &x_{2,n}^* \\
+					\vdots & \vdots & \ddots & \vdots \\
+					0 & 0 & \dots & x_{n,n}^*\\
+					0 & 0 & \dots & 0 \\
+					\vdots & \vdots & \ddots & \vdots \\
+					0 & 0 & \dots & 0
+				\end{bmatrix} \begin{bmatrix}
+					\hat{b}_1 \\ \hat{b}_2 \\ \vdots \\ \hat{b}_{n-1} \\ \hat{b}_{n} \end{bmatrix} \right)
+			\end{align*}
+		Now, through backwards substitution we know that $ \hat{b}_n=y_n^*/x_{n,n}^* $ so that \[ y_n^*-x_{n,n}^*\hat{b}_n = y_n^* -y_n^* = 0  \]
+		Similarly, now since $ \hat{b}_{n-1}= \left(y_{n-1}^{*}-x_{n-1, n}^{*} \hat{b}_{n}\right) / x_{n-1, n-1}^{*}$  we have 
+		\[ y_{n-1}^*-x_{n-1,n-1}^*\hat{b}_{n-1}-x_{n-1,n}^*\hat{b}_n = y_{n-1}^*-y_{n-1}^*+x_{n-1,n}^*\hat{b}_n-x_{n-1,n}^*\hat{b}_n=0 \]
+		and following the general formula, $\hat{b}_{j}=\left(y_{j}^{*}-\sum_{i=j+1}^{n} x_{j, i}^{*} \hat{b}_{i}\right) / x_{j, j}^{*}, \quad j=n-1, n-2, \ldots, 1$, we arrive at values of 0 for all $ \tilde{y}_k^*,\ k=1,2,\dots,n $ where $ \tilde{y}=y^*-X^* \hat{b} $ and the $ k $ subscript denotes the $ k^{th} $ entry of $ \tilde{y} $. Thus: $ \tilde{y} = [ 0,\ 0,\ \dots,\ y_{n+1}^*,\ y_{n+2}^*,\ \dots,\  y_{m}^* ]^T $. Now, observe that 
+		\begin{align*}	
+			\| O^T \tilde{y} \|^2 &= (O^T\tilde{y})^T(O^T\tilde{y}) \\
+			&= \tilde{y}^T O O^T \tilde{y} \\
+			&= \tilde{y}^T I_m \tilde{y} \\
+			&= \tilde{y}^T\tilde{y} \\ 
+			&= 0+0+\dots + (y_{n+1}^*)^2 + (y_{n+2}^*)^2 + \dots +  (y_{m}^*)^2\\
+			&= \sum_{i=n+1}^{m}\left|y_{i}^{*}\right|^{2} 
+			\end{align*}
+		\end{proof}
+			
+		\section{}
+		Let $ O $ be an $ n \times n $ orthogonal real matrix, i.e. $ O^T O=I_n $ where $ I_n $ is an $ n \times n $ identity matrix. Prove that
+		\begin{enumerate}[i)]
+			\item Any entry in $ O $ is between -1 and 1.
+			\item If $ \lambda $ is an eigenvalue of $ O $, then $ |\lambda|=1. $
+			\item $ \det(O) $ is either 1 or -1.
+		\end{enumerate}
+	\subsection{}
+		\begin{proof}
+			Let $ O $ be denoted as $ O=[v_1 v_2 \dots v_n] $. Then \[ O^T O = \begin{bmatrix}
+			v_1^T \\ v_2^T \\ \vdots \\ v_n^T
+			\end{bmatrix} \begin{bmatrix}
+			v_1 & v_2 & \dots & v_n
+			\end{bmatrix} =\begin{bmatrix}
+			v_1^Tv_1 & v_1^Tv_2 & \dots v_1^Tv_n \\
+			v_2^Tv_1 & v_2^Tv_2 & \dots & v_2^tv_n \\
+			\vdots & \vdots & \ddots & \vdots \\ 
+			v_n^Tv_1 & v_n^Tv_2 & \dots & v_n^Tv_n
+			\end{bmatrix} =\begin{bmatrix}
+			1 & 0 & \dots & 0 \\
+			0 & 1 & \dots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \dots &1
+			\end{bmatrix}  = I_n \] 
+			Thus, the rows and columns of $ O $ are orthonormal. This implies that $ v_i^Tv_i=\| v_i \|^2 = 1 $, that is each row/column is of unit length. This is only possible if each element ,$ u_i,j\in v_i,\ j=1,\dots, n $, must be between 0 and 1.
+			
+		\end{proof}
+	\subsection{}
+		\begin{proof}
+			Let $ \lambda $ be an eigenvalue of $ O $. By definition, we must have that $ Ov=\lambda v $. 
+			\begin{align*}
+				 Ov&=\lambda v\\
+				 (Ov)^TOv&=(Ov)^T \lambda v\\
+				 v^TO^TOv&=(\lambda v)^T\lambda v\\
+				 v^Tv&=\lambda^2v^Tv\\
+				 \lambda^2&=1\\
+				 &\RA |\lambda|=1
+			\end{align*}
+		\end{proof}
+	
+	\subsection{}
+		\begin{proof}
+			\begin{align*}
+				\det(O^TO)& = \det(O^T)\det(O) = 1 = \det(I_n) \\
+				&= \det(O)\det(O)\ = 1 \\
+				&\RA \det(O)=\pm 1
+			\end{align*}
+			
+		\end{proof}
+	
+	\section{}
+	Let $H$ be an $n$ x $n$ householder matrix given by
+	$$
+	H=I_{n}-2 \frac{v v^{T}}{v^{T} v}, \text { for any non-zero } n \text { -length column vector } v( \neq 0) \text { . }
+	$$
+	Show that $H$ is a symmetric, orthogonal, and reflection matrix. That is, $H$ satisfies
+	\begin{enumerate}[i)]
+		\item $H=H^{T} $
+		\item $H H^{T}=I_{n} $
+		\item  $\det(H)=-1$
+	\end{enumerate}
+
+		\subsection{Symmetry}
+		\begin{proof}
+			Let $ a= v^Tv $ and note that $ a $ is a scalar. Further, observe that \begin{align*}
+			 H&= I_{n}-2 \frac{v v^{T}}{a} \\
+			 &= \begin{bmatrix}
+			 1 & 0 & \dots & 0 \\
+			 0 & 1 & \dots & 0 \\
+			 \vdots & \vdots & \ddots & \vdots \\
+			 0 & 0 & \dots &1
+			 \end{bmatrix} - 2\begin{bmatrix}
+			 \frac{v_1^2}{a} & \frac{v_1v_2}{a} & \dots & \frac{v_1v_n}{a}\\
+			 \frac{v_2v_1}{a} & \frac{v_2^2}{a} & \dots & \frac{v_2v_n}{a} \\
+			 \vdots & \vdots & \ddots & \vdots \\
+			 \frac{v_nv_1}{a} & \frac{v_nv_2}{a} & \dots & \frac{v_n^2}{a}
+			 \end{bmatrix} \\
+			 H &= \begin{bmatrix}
+			 1-2\frac{v_1^2}{a} & -2\frac{v_1v_2}{a} & \dots & -2\frac{v_1v_n}{a}\\
+			 -2\frac{v_2v_1}{a} & 1-2\frac{v_2^2}{a} & \dots & -2\frac{v_2v_n}{a} \\
+			 \vdots & \vdots & \ddots & \vdots \\
+			 -2\frac{v_nv_1}{a} & -2\frac{v_nv_2}{a} & \dots & 1-2\frac{v_n^2}{a}
+			 \end{bmatrix}
+			\end{align*}
+		Now as $ v_iv_j=v_jv_i $ since $ v_i,v_j $ are scalars. Thus $ H $ is symmetric, since for any element, $ h_{i,j} $ of $ H $ in the $ i^{th} $ row and $ j^{th} $ column will equal its transpose $ h_{j,i} $.
+		\end{proof}
+		\subsection{Orthogonality}
+		\begin{proof}
+			Observe that as $ H $ is symmetric, $ HH^T=H^TH=HH $. Thus, 
+			\[ HH= \begin{bmatrix}
+			1-2\frac{v_1^2}{a} & -2\frac{v_1v_2}{a} & \dots & -2\frac{v_1v_n}{a}\\
+			-2\frac{v_2v_1}{a} & 1-2\frac{v_2^2}{a} & \dots & -2\frac{v_2v_n}{a} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			-2\frac{v_nv_1}{a} & -2\frac{v_nv_2}{a} & \dots & 1-2\frac{v_n^2}{a}
+			\end{bmatrix} \begin{bmatrix}
+			1-2\frac{v_1^2}{a} & -2\frac{v_1v_2}{a} & \dots & -2\frac{v_1v_n}{a}\\
+			-2\frac{v_2v_1}{a} & 1-2\frac{v_2^2}{a} & \dots & -2\frac{v_2v_n}{a} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			-2\frac{v_nv_1}{a} & -2\frac{v_nv_2}{a} & \dots & 1-2\frac{v_n^2}{a}
+			\end{bmatrix} \]
+			The elements on the main diagonal of $ HH,\ \tilde{h}_{i,i}$, are: 
+			\begin{align*}
+				\tilde{h}_{i,i}&=(1-2\frac{v_i^2}{a})(1-2\frac{v_i^2}{a}) + \sum_{j\neq i}^{n}(-2\frac{v_iv_j}{a})(-2\frac{v_iv_j}{a}) \\
+				&= 1+4(\frac{v_i^4}{a^2}) + -4\frac{v_iv_j}{a} + \sum_{j\neq i}^{n} 4  \left( \frac{v_iv_j}{a} \right)^2  \\
+				&= 1+4\frac{v_i^2}{a} \left( -1 + \sum_{j\neq i} \frac{v_j^2}{a} \right) \\
+				&=1+4\frac{v_i^2}{a} \left( -1 + \frac{v^Tv}{a} \right)\\
+				&= 1+4\frac{v_i^2}{a} \left( -1 + \frac{a}{a} \right) \\
+				&= 1+4\frac{v_i^2}{a} \left( 0 \right) = 1
+			\end{align*}
+			For the elements on the off-diagonal, $ \tilde{h}_{i,j},\ i\neq j $, we focus only on the specific case of $ \tilde{h}_{1,2} $ since all other off-diagonal elements follow similarly:
+			\begin{align*}
+				\tilde{h}_{1,2}&=(1-\frac{v_1^2}{a})(-2\frac{v_1v_2}{a})+(-2\frac{v_1v_2}{a})(1-\frac{v_2^2}{a})+\dots+(-2\frac{v_1v_n}{a})(-2\frac{v_nv_2}{a}) \\
+				&=-4\frac{v_1v_2}{a} +4\frac{v_1^3v_2}{a^2} +4\frac{v_1v_2^3}{a^2}+\dots+4\frac{v_1v_n^2v_2}{a^2}\\
+				&=4\frac{v_1v_2}{a} \left( -1 +\frac{1}{a}(v_1^2+v_2^2+\dots+v_n^2) \right)\\
+				&=4\frac{v_1v_2}{a} \left( -1 +\frac{1}{a}(v^Tv) \right) \\
+				&=4\frac{v_1v_2}{a} \left( -1 +\frac{1}{a}(a) \right) =4\frac{v_1v_2}{a} \left( -1 + 1 \right) = 0
+			\end{align*}
+		Consequently, we have that \[ HH= \begin{bmatrix}
+		1-2\frac{v_1^2}{a} & -2\frac{v_1v_2}{a} & \dots & -2\frac{v_1v_n}{a}\\
+		-2\frac{v_2v_1}{a} & 1-2\frac{v_2^2}{a} & \dots & -2\frac{v_2v_n}{a} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		-2\frac{v_nv_1}{a} & -2\frac{v_nv_2}{a} & \dots & 1-2\frac{v_n^2}{a}
+		\end{bmatrix} \begin{bmatrix}
+		1-2\frac{v_1^2}{a} & -2\frac{v_1v_2}{a} & \dots & -2\frac{v_1v_n}{a}\\
+		-2\frac{v_2v_1}{a} & 1-2\frac{v_2^2}{a} & \dots & -2\frac{v_2v_n}{a} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		-2\frac{v_nv_1}{a} & -2\frac{v_nv_2}{a} & \dots & 1-2\frac{v_n^2}{a}
+		\end{bmatrix} = \begin{bmatrix}
+		1 & 0 & \dots & 0 \\
+		0 & 1 & \dots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \dots &1
+		\end{bmatrix} \]
+		Conclusively, $ H $ is orthogonal.
+		\end{proof}
+	\subsection{$ \mathbf{ \det(H)=-1 } $}
+	\begin{proof}
+		Through our results in $ i) $ and $ ii) $ we have established symmetry and orthogonality. Now observe that: 
+		\begin{align*}
+			H=H^T \RA HH^T=I_n &\RA HH=I_n\\
+			&\RA \det(HH) = \det(H)\det(H)=\det(I_n)=1\\
+			&\RA \lambda_H = \pm 1\\
+			&\RA H=v \begin{bmatrix}
+			\lambda_1 & 0 & \dots & 0\\
+			0 & \lambda_2 & \dots & 0 \\
+			0 & 0 & \dots & \lambda_n
+			\end{bmatrix} v^T
+		\end{align*}
+		Where $ \lambda_H $ represents some eigenvalue of $ H $. Now, taking the trace of $ H $, which is equal to the sum of its eigenvalues:
+		\begin{align*}
+			\sum_{i=1}^{n} \lambda_i = tr(H) &= tr(I_{n}-2 \frac{v v^{T}}{v^T v}) \\
+			&=  tr(I_{n}-2) -  2tr(  \frac{v v^{T}}{v^T v} ) \\
+			&= n -2 tr(\frac{v v^{T}}{v^T v}) \\
+			&= n - 2 tr(\frac{v^T v}{v^T v}) \\
+			&= n-2tr(1)\\
+			\sum_{i=1}^{n} \lambda_i&=n-2
+		\end{align*}
+		where the third-to-last line comes from the fact that $ tr(AB)=tr(BA) $ for matrices $ A $ and $ B $. This result implies that there can only be one $``-1" $ in the $ \lambda_i $'s. Consequently, \[ det(H) = -1 = \prod_{i=1}^{n} \lambda_i \]
+	\end{proof}
+\end{document}

@@ -1,0 +1,16 @@
+--------------------------------------------------------------
+Oscar Martinez 	 Homework 4: Problems 1-2 	 STA 5106
+--------------------------------------------------------------
+-----Problem 1-----
+m =
+
+   200
+
+
+n =
+
+   644
+
+---Part (a)---
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('HW4_OM', 'C:\Users\oscar\Google Drive\FSU\Courses\Comp Stat\Homework\HW4\HW4_OM.m', 34)" style="font-weight:bold">HW4_OM</a> (<a href="matlab: opentoline('C:\Users\oscar\Google Drive\FSU\Courses\Comp Stat\Homework\HW4\HW4_OM.m',34,0)">line 34</a>)
+} 

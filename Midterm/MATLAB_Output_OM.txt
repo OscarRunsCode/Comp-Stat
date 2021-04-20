@@ -1,0 +1,43 @@
+----------------------------------------------------------------------
+	 Oscar Martinez 	 Midterm 	 STA 5106
+----------------------------------------------------------------------
+k =  1 	 PCA Acc = 11.00% 	 SP Acc = 18.00% 	 Diff = 7.00% 
+k =  2 	 PCA Acc = 34.50% 	 SP Acc = 19.50% 	 Diff = 15.00% 
+k =  3 	 PCA Acc = 54.50% 	 SP Acc = 27.00% 	 Diff = 27.50% 
+k =  4 	 PCA Acc = 60.50% 	 SP Acc = 24.00% 	 Diff = 36.50% 
+k =  5 	 PCA Acc = 67.00% 	 SP Acc = 28.50% 	 Diff = 38.50% 
+k =  6 	 PCA Acc = 72.50% 	 SP Acc = 32.00% 	 Diff = 40.50% 
+k =  7 	 PCA Acc = 78.50% 	 SP Acc = 39.00% 	 Diff = 39.50% 
+k =  8 	 PCA Acc = 78.50% 	 SP Acc = 38.50% 	 Diff = 40.00% 
+k =  9 	 PCA Acc = 81.50% 	 SP Acc = 39.50% 	 Diff = 42.00% 
+k = 10 	 PCA Acc = 82.50% 	 SP Acc = 43.50% 	 Diff = 39.00% 
+k = 11 	 PCA Acc = 82.50% 	 SP Acc = 42.50% 	 Diff = 40.00% 
+k = 12 	 PCA Acc = 83.00% 	 SP Acc = 47.00% 	 Diff = 36.00% 
+k = 13 	 PCA Acc = 84.50% 	 SP Acc = 48.00% 	 Diff = 36.50% 
+k = 14 	 PCA Acc = 84.00% 	 SP Acc = 47.00% 	 Diff = 37.00% 
+k = 15 	 PCA Acc = 85.00% 	 SP Acc = 45.00% 	 Diff = 40.00% 
+k = 16 	 PCA Acc = 84.00% 	 SP Acc = 43.50% 	 Diff = 40.50% 
+k = 17 	 PCA Acc = 84.00% 	 SP Acc = 49.00% 	 Diff = 35.00% 
+k = 18 	 PCA Acc = 83.50% 	 SP Acc = 49.00% 	 Diff = 34.50% 
+k = 19 	 PCA Acc = 84.00% 	 SP Acc = 46.50% 	 Diff = 37.50% 
+k = 20 	 PCA Acc = 85.50% 	 SP Acc = 47.00% 	 Diff = 38.50% 
+k = 21 	 PCA Acc = 85.50% 	 SP Acc = 47.50% 	 Diff = 38.00% 
+k = 22 	 PCA Acc = 85.50% 	 SP Acc = 48.00% 	 Diff = 37.50% 
+k = 23 	 PCA Acc = 86.00% 	 SP Acc = 48.50% 	 Diff = 37.50% 
+k = 24 	 PCA Acc = 86.50% 	 SP Acc = 48.50% 	 Diff = 38.00% 
+k = 25 	 PCA Acc = 87.00% 	 SP Acc = 50.00% 	 Diff = 37.00% 
+k = 26 	 PCA Acc = 86.50% 	 SP Acc = 50.00% 	 Diff = 36.50% 
+k = 27 	 PCA Acc = 87.50% 	 SP Acc = 50.50% 	 Diff = 37.00% 
+k = 28 	 PCA Acc = 87.50% 	 SP Acc = 55.50% 	 Diff = 32.00% 
+k = 29 	 PCA Acc = 88.00% 	 SP Acc = 57.00% 	 Diff = 31.00% 
+k = 30 	 PCA Acc = 88.00% 	 SP Acc = 57.50% 	 Diff = 30.50% 
+k = 31 	 PCA Acc = 88.50% 	 SP Acc = 57.50% 	 Diff = 31.00% 
+k = 32 	 PCA Acc = 88.00% 	 SP Acc = 58.00% 	 Diff = 30.00% 
+k = 33 	 PCA Acc = 88.50% 	 SP Acc = 57.00% 	 Diff = 31.50% 
+k = 34 	 PCA Acc = 88.50% 	 SP Acc = 57.00% 	 Diff = 31.50% 
+k = 35 	 PCA Acc = 88.00% 	 SP Acc = 57.50% 	 Diff = 30.50% 
+k = 36 	 PCA Acc = 87.50% 	 SP Acc = 60.00% 	 Diff = 27.50% 
+k = 37 	 PCA Acc = 87.50% 	 SP Acc = 59.50% 	 Diff = 28.00% 
+k = 38 	 PCA Acc = 87.50% 	 SP Acc = 60.00% 	 Diff = 27.50% 
+k = 39 	 PCA Acc = 87.50% 	 SP Acc = 61.50% 	 Diff = 26.00% 
+k = 40 	 PCA Acc = 87.50% 	 SP Acc = 63.50% 	 Diff = 24.00% 

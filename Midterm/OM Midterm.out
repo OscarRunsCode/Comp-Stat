@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Problem Statement}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Image Examples}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Methodology and Approach}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Background}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Data Structure}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Feature Extraction}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.3.1}{PCA Algorithm}{subsection.2.3}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Simple Projection}{subsection.2.3}% 8
+\BOOKMARK [2][-]{subsection.2.4}{Classification}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{MATLAB Programs}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Code:}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Figures:}{section.4}% 13
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Accuracy}{subsection.4.1}% 14
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Correct PCA Examples}{subsection.4.1}% 15
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Incorrect PCA Examples}{subsection.4.1}% 16
+\BOOKMARK [3][-]{subsubsection.4.1.4}{Examples Where Simple Projection was Correct but PCA Was Not}{subsection.4.1}% 17
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 18

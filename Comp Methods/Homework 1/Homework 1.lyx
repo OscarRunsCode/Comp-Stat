@@ -1,0 +1,641 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\paragraph_spacing double
+Joe Sinotte
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+Homework #1
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+1.
+ Prove that the eigenvalues of a symmetric matrix are real.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Assume the the contrary (i.e.
+ that A is symmetric and that A has at least one non real eigenvalue).
+\end_layout
+
+\begin_layout Standard
+\noindent
+By definition, eigenvalues must satisfy
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Ax=\lambda x
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align block
+By assumption, both sides of the above equation are complex.
+ Therefore, we can now assert that their complex conjugates must also be
+ equal.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Thus, denoting the complex conjugates by 
+\begin_inset Formula $\hat{\lambda}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+, we can see that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+A\hat{x}=\hat{\lambda}\hat{x}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+By premultiplying both sides by 
+\begin_inset Formula $\hat{x}'$
+\end_inset
+
+ and from the multiplication of complex numbers, we gain
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{x}'Ax-x'A\hat{x}=(\lambda-\hat{\lambda})\hat{x}'x
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align block
+Since A is symmetric, the left side of the equation equals zero.
+ This implies that the right side must also equal zero, but since 
+\begin_inset Formula $\hat{x}'x$
+\end_inset
+
+ can never be equal to zero it must be that 
+\begin_inset Formula $\lambda=\hat{\lambda}.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Hence, lambda equals its conjugate.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Thus lambda must be real.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+\align block
+2.
+ Show that 
+\begin_inset Formula $\parallel y-X\hat{b}\parallel^{2}=\overset{m}{\underset{i=n+1}{\sum}}\mid y_{i}^{*}\mid^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Let O be an orthogonal matrix such that 
+\begin_inset Formula $X^{*}=OX$
+\end_inset
+
+, where 
+\begin_inset Formula $X^{*}$
+\end_inset
+
+ is an upper triangular matrix.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Further define 
+\begin_inset Formula $Y^{*}=OY$
+\end_inset
+
+ and 
+\begin_inset Formula $\varepsilon^{*}=O\varepsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Now, partition 
+\begin_inset Formula $X^{*},Y^{*},\, and\,\varepsilon^{*}$
+\end_inset
+
+such that the regression equation can be rewritten as
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\left[\begin{array}{c}
+Y_{1}^{*}\\
+Y_{2}^{*}
+\end{array}\right]=\left[\begin{array}{c}
+X_{1}^{*}\\
+0
+\end{array}\right]b+\left[\begin{array}{c}
+\varepsilon_{1}^{*}\\
+\varepsilon_{2}^{*}
+\end{array}\right]$
+\end_inset
+
+, where 
+\begin_inset Formula $X_{1}^{*}$
+\end_inset
+
+ contains the first n rows of 
+\begin_inset Formula $X^{*}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+We now have that
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\parallel Y^{*}-X^{*}b\parallel^{2}=\parallel Y_{1}^{*}-X_{1}^{*}b\parallel^{2}+\parallel Y_{2}^{*}\parallel^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Now, we can choose b such that 
+\begin_inset Formula $X_{1}^{*}b=Y_{1}^{*}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Thus, we now have that
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\parallel Y^{*}-X^{*}b\parallel^{2}=\parallel Y_{2}^{*}\parallel^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Which, after a little algebra, gives
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\parallel$
+\end_inset
+
+
+\begin_inset Formula $Y_{2}^{*}\parallel^{2}=\left[Y_{2}^{*}\right]^{'}\left[Y_{2}^{*}\right]=\overset{m}{\underset{i=n+1}{\sum}}\mid y_{i}^{*}\mid^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+3.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+i.
+ Show that any entry in O is between -1 and 1
+\end_layout
+
+\begin_layout Standard
+\noindent
+Assume that O is an nxn orthogonal matrix
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\Rightarrow O^{T}O=I_{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Since diagonal elements of 
+\begin_inset Formula $I_{n}$
+\end_inset
+
+ are all equal to one, the following must be true for all j
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\underset{j=1}{\overset{n}{\sum}}O_{ij}^{2}=1$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Thus, no single entry in any row i can exceed one in absolute value.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Since this statement is true for all i, then no entry in orthogonal matrix
+ O can exceed 1 in absolute value.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+ii.
+ Show that if 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is an eigenvalue of O, then 
+\begin_inset Formula $\mid\lambda\mid=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Since O is orthogonal, it satisfies
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $AA^{T}=I_{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\Rightarrow A^{-1}=A^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Since the eigenvalues of a matrix are equal to the eigenvalues of that matrix's
+ transpose, we know that the eigenvalues of A are equal to the eigenvalues
+ of 
+\begin_inset Formula $A^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+From here, we can see that the eigenvalues of A are equal to the eigenvalues
+ of 
+\begin_inset Formula $A^{-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+We also know that the eigenvalues of an inverse matrix are equal to the
+ reciprocals of that matrix itself.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Thus, the eigenvalues of A are equal to their own reciprocals.
+\end_layout
+
+\begin_layout Standard
+\noindent
+This implies that the eigenvalues of A must be either 1 or -1
+\end_layout
+
+\begin_layout Standard
+\noindent
+Thus, 
+\begin_inset Formula $\mid\lambda\mid=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+iii.
+ Show that 
+\begin_inset Formula $det(O)=\pm1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Since O is orthogonal, it satisfies
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $OO^{T}=I_{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $det(OO^{T})=det(I_{n})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $det(O)det(O^{T})=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $(det(O))^{2}=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $det(O)=\pm1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+4.
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+a.
+ Show that 
+\begin_inset Formula $H=H^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $H=I_{n}-2\frac{vv^{T}}{v^{T}v}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $H^{T}=\left[I_{n}-2\frac{vv^{T}}{v^{T}v}\right]^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $H^{T}=I_{n}^{T}-2\left[\frac{vv^{T}}{v^{T}v}\right]^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $H^{T}=I_{n}-2\frac{vv^{T}}{v^{T}v}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Hence, 
+\begin_inset Formula $H=H^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+b.
+ Show that
+\begin_inset Formula $HH^{T}=I_{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $HH^{T}=\left[I_{n}-2\frac{vv^{T}}{v^{T}v}\right]\left[I_{n}-2\frac{vv^{T}}{v^{T}v}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $HH^{T}=I_{n}-2\frac{vv^{T}}{v^{T}v}-2\frac{vv^{T}}{v^{T}v}+4\left[\frac{vv^{T}vv^{T}}{v^{T}vv^{T}v}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Since 
+\begin_inset Formula $v^{T}v$
+\end_inset
+
+ is a scalar, it can be factored out of both the numerator and the denominator
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $HH^{T}=I_{n}-4\frac{vv^{T}}{v^{T}v}+4\frac{vv^{T}}{v^{T}v}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $HH^{T}=I_{n}$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

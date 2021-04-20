@@ -1,0 +1,636 @@
+\documentclass[12pt]{article}
+%%\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{bigfoot} % to allow verbatim in footnote
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{subcaption} 
+
+\usepackage[T1]{fontenc}
+% Nicer default font (+ math font) than Computer Modern for most use cases
+\usepackage{mathpazo}
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+	\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+% Set max figure width to be 80% of text width, for now hardcoded.
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+% Ensure that by default, figures have no caption (until we provide a
+% proper Figure object with a Caption API and a way to capture that
+% in the conversion process - todo).
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+
+\usepackage{adjustbox} % Used to constrain images to a maximum size 
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+	\def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics 
+% to support a larger range 
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+% normalem makes italics be italics, not underlines
+\usepackage{mathrsfs}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage{microtype}
+\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage{titlesec}
+\usepackage{xfrac}
+\usepackage{marginnote}
+%\usepackage [autostyle, english = american]{csquotes}
+%\MakeOuterQuote{"}
+\usepackage{filecontents}
+\usepackage{fancyvrb}
+
+
+
+\pagestyle{fancy}
+\rhead{Oscar Martinez}
+\lhead{STA 5106} 					%Insert subject
+\chead{HW 6} 					%Insert Title
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Lagr}{\mathcal{L}}
+\newcommand{\LRA}{\Leftrightarrow}
+\newcommand{\LA}{\Leftarrow}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\rsa}{\rightsquigarrow} 
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\at}{a_{t+1}}
+\newcommand{\ct}{c_{t+1}}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator{\Var}{\mathbb{V}}% expected value
+
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesubsubsection}{\roman{subsubsection}.)}
+
+ % Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+\definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+\definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+% commands and environments needed by pandoc snippets
+% extracted from the output of `pandoc -s`
+\providecommand{\tightlist}{%
+	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Additional commands for more recent versions of Pandoc
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+% Define a nice break command that doesn't care if a line doesn't already
+% exist.
+\def\br{\hspace*{\fill} \\* }
+% Math Jax compatibility definitions
+\def\gt{>}
+\def\lt{<}
+\let\Oldtex\TeX
+\let\Oldlatex\LaTeX
+\renewcommand{\TeX}{\textrm{\Oldtex}}
+\renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+% Document parameters
+% Document title
+ % Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+	\let\PY@ul=\relax \let\PY@tc=\relax%
+	\let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+	\PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+				\PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+% Exact colors from NB
+\definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+\definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy 
+% Setup hyperref package
+\hypersetup{
+	breaklinks=true,  % so long urls are correctly broken across lines
+	colorlinks=true,
+	urlcolor=urlcolor,
+	linkcolor=linkcolor,
+	citecolor=citecolor,
+}
+
+
+\begin{filecontents*}{HW6.m}
+	 clc
+	clear
+	
+	%  % Diary
+	%  dfile ='MATLAB_Output_OM.txt';
+	%  if exist(dfile, 'file') ; delete(dfile); end
+	%  diary(dfile)
+	%  diary on
+	%  diary MATLAB_Output_OM.txt
+	
+	%Introduction
+	fprintf('--------------------------------------------------------------\n');
+	fprintf('Oscar Martinez \t Homework 6: Problems 1 and 2 \t STA 5106\n');
+	fprintf('--------------------------------------------------------------\n');
+	
+	%-----Problem 1:-----
+	fprintf('-----------Problem 1----------\n');
+	
+	n = 100;
+	x = [6 52 28 14];
+	
+	% EM procedure
+	theta0 = 0.1;  % initial guess
+	
+	th = @(x) x/(2+x);
+	theta(1) = theta0;
+	nth= theta(1)+1;
+	i = 1;
+	while (abs(theta(i)-nth)>1e-6)
+	nth = theta(i);
+	theta(i+1) = ( (th(theta(i)))*x(2)+x(4)+x(1) )/ ...
+	(2*( (th(theta(i)))*x(2)+x(1)+x(3)+x(4) ));
+	i = i+1;
+	end
+	
+	theta
+	
+	% plot the estimate
+	figure(1)
+	subplot(211);
+	plot(theta, 'b-*');
+	xlabel('Iteration');
+	ylabel('Theta');
+	title('Problem 1 Estimate')
+	
+	% compute the log-likelihood
+	K = length(theta);
+	for k = 1:K
+	ll(k) = (x(1)+x(2)+x(4))*log(theta(k)) + x(3)*log(1-2*theta(k));
+	end
+	
+	% plot the log-likelihood
+	subplot(212);
+	plot(ll, 'ro-');
+	xlabel('Iteration');
+	ylabel('Log-Likelihood');
+	title('Problem 1 Likelihood')
+	
+	%-----Problem 2:-----
+	fprintf('-----------Problem 2----------\n');
+	
+	
+	fprintf('----------Dataset 1---------\n');
+	clear
+	
+	load ('hw6_2_data1.mat')
+	Y1=Y;
+	
+	n=length(Y);
+	figure(2)
+	subplot(211);
+	hist(Y);
+	xlabel('Y');
+	ylabel('Frequency');
+	title('Data 1 Histogram')
+	
+	alpha(1,:) = [0.5 0.5];
+	mu(1,:) = [0 5];
+	sigma(1,:) = [1 0.5];
+	
+	u = 1;
+	m = 1;
+	while (u > 1e-6)
+	for i = 1:n
+	temp = alpha(m,:).*sigma(m,:).^(-1).*exp(-(Y(i)-mu(m,:)).^2./(2*sigma(m,:)));
+	P(:,i,m) = temp'./sum(temp);
+	end
+	alpha(m+1,:) = mean(P(:,:,m),2)';
+	mu(m+1,:) = sum(ones(2,1)*Y.*P(:,:,m),2)'./sum(P(:,:,m),2)';
+	sigma(m+1,:) = sqrt(sum((ones(2,1)*Y-mu(m+1,:)'*ones(1,n)).^2.*P(:,:,m),2)'...
+	./sum(P(:,:,m),2)');
+	u = max([norm(alpha(m+1,:)-alpha(m,:)) norm(mu(m+1,:)-mu(m,:)) ...
+	norm(sigma(m+1,:)-sigma(m,:))]);
+	
+	m=m+1;
+	end
+	
+	m
+	
+	% compute the log-likelihood
+	K = length(alpha);
+	for k = 1:K
+	f1 = normpdf(Y,mu(k,1),sigma(k,1));
+	f2 = normpdf(Y,mu(k,2),sigma(k,2));
+	ll(k) = sum(log(alpha(k,1)*f1+alpha(k,2)*f2));
+	end
+	
+	% plot the log-likelihood
+	figure(3)
+	subplot(211);
+	plot(ll, 'r-');
+	xlabel('Iteration');
+	ylabel('Log-Likelihood');
+	title('Data 1 Likelihood')
+	
+	
+	fprintf('mu = (%4.3f, %4.3f), sigma = (%4.3f, %4.3f), alpha = (%4.3f, %4.3f) \n', mu(end,1), mu(end,2), sigma(end,1), sigma(end,2), alpha(end,1), alpha(end,2))
+	
+	fprintf('\n----------Dataset 2---------\n');
+	
+	load ('hw6_2_data2.mat')
+	Y2=Y;
+	n=length(Y);
+	figure(2)
+	subplot(212);
+	hist(Y);
+	xlabel('Y');
+	ylabel('Frequency');
+	title('Data 2 Histogram')
+	
+	alpha(1,:) = [0.5 0.5];
+	mu(1,:) = [1 4];
+	sigma(1,:) = [0.3 0.1];
+	
+	u = 1;
+	m = 1;
+	while (u > 1e-3)
+	for i = 1:n
+	temp = alpha(m,:).*sigma(m,:).^(-1).*exp(-(Y(i)-mu(m,:)).^2./(2*sigma(m,:)));
+	P(:,i,m) = temp'./sum(temp);
+	end
+	alpha(m+1,:) = mean(P(:,:,m),2)';
+	mu(m+1,:) = sum(ones(2,1)*Y.*P(:,:,m),2)'./sum(P(:,:,m),2)';
+	sigma(m+1,:) = sqrt(sum((ones(2,1)*Y-mu(m+1,:)'*ones(1,n)).^2.*P(:,:,m),2)'...
+	./sum(P(:,:,m),2)');
+	u = max([norm(alpha(m+1,:)-alpha(m,:)) norm(mu(m+1,:)-mu(m,:)) ...
+	norm(sigma(m+1,:)-sigma(m,:))]);
+	
+	m=m+1;
+	end
+	
+	m
+	fprintf('mu = (%4.3f, %4.3f), sigma = (%4.3f, %4.3f), alpha = (%4.3f, %4.3f) \n', mu(end,1), mu(end,2), sigma(end,1), sigma(end,2), alpha(end,1), alpha(end,2))
+	
+	
+	% compute the log-likelihood
+	K = length(alpha);
+	for k = 1:K
+	f1 = normpdf(Y,mu(k,1),sigma(k,1));
+	f2 = normpdf(Y,mu(k,2),sigma(k,2));
+	ll(k) = sum(log(alpha(k,1)*f1+alpha(k,2)*f2));
+	end
+	
+	% plot the log-likelihood
+	figure(3)
+	subplot(212);
+	plot(ll, 'b-');
+	xlabel('Iteration');
+	ylabel('Log-Likelihood');
+	title('Data 2 Likelihood')
+	
+	diary off
+	
+\end{filecontents*}
+
+\let\ph\mlplaceholder % shorter macro
+\lstMakeShortInline"
+
+\lstset{
+	style              = Matlab-editor,
+	basicstyle         = \mlttfamily,
+	escapechar         = ",
+	mlshowsectionrules = true,
+}
+
+
+\begin{document}
+	
+	\section*{Problems 1 and 2:}
+		\[ ( x_1,\ x_2,\ x_3,\ x_4 ) \sim \mathcal{M}(n; 0.25 \theta,\ 0.25 (2+\theta),\ 0.5(1-2\theta),\ 0.5\theta ) \]
+	
+	\subsection*{Log-Likelihood}
+		\begin{align*}
+			l=\sum_{i=1}^{n} log(f(x|\theta)) &= x_1 log (0.25\theta)+x_2log(.25(2+\theta)) + x_3log(0.5(1-2\theta)) + x_4log(0.5\theta) + C_1 \\
+			&= x_1 log (\theta)+x_2log(\theta) + x_3log(2-4\theta) + x_4log(\theta) + C_2
+		\end{align*}  
+	Where $ C_i $ are constants.\\
+	Let $ x_2=y_1+y_2 \quad s.t.\ y_1=0.5,\ y_2=0.25\theta $. Then 
+	\[ y=(x_1,\ y_1,\ y_2,\ x_3,\ x_4) \sim \mathcal{M}(n; 0.25 \theta,\ 0.5,\ 0.25\theta ,\ 0.5(1-2\theta),\ 0.5\theta )  \]
+	Then: 
+	 \begin{align*}
+	 	l_y = \sum_{i=1}^{n} log(f(x|\theta)) &= x_1 log (0.25\theta)+y_1log(0.5)+y_2log(0.25\theta)\\
+	 	& \quad + x_3log(0.5(1-2\theta)) + x_4log(0.5\theta) + C_3 \\
+	 l_y	&= (x_1 +y_2+x_4)log(\theta) + x_3log(1-2\theta) + C_4
+	 \end{align*}
+	
+	\subsection*{E-Step}
+		\begin{align*}
+			Q(\theta|\theta_K,x) = \EX[l_y|\theta_K, x] &=\int_{y}l_y \Prob(y|\theta_K,\ x) dy \\
+			&= \sum_{y=1}^{x_2} [(y_2+x_1+x_4)log(\theta)+x_3log(1-2\theta)+C_4]\Prob(y_2|\theta_K,\ x)\\
+			&=(\EX[y_2|\theta_K,x]+x_1+x_4)log(\theta)+x_3log(1-2\theta) + C_4
+		\end{align*}
+		Now, as $ (y_1,y_2)\sim Binomial(x_2; \frac{2}{2+\theta_K},\ \frac{\theta_K}{2+\theta_K}) $ at the $ K $th iteration:
+		\begin{align*}
+			\EX[y_2|\theta_K,x] &= \sum_{y_2=0}^{x_2} y_2 \frac{x_2!}{y_2!(x_2-y_2)!} \left( \frac{2}{2+\theta_K} \right)^{x_2-y_2} \left( \frac{\theta_K}{2+\theta_K} \right)^{y_2}\\
+			&= \sum_{y_2=1}^{x_2} x_2 \frac{(x_2-1)!}{(y_2-1)!(x_2-y_2)!} \left( \frac{2}{2+\theta_K} \right)^{x_2-y_2} \left( \frac{\theta_K}{2+\theta_K} \right)^{y_2} \\
+			&= \left( \frac{\theta_K}{2+\theta_K} \right) x_2 \sum_{y_2-1=0}^{x_2-1} \frac{(x_2-1)!}{(y_2-1)!((x_2-1)-(y_2-1))!} \left( \frac{2}{2+\theta_K} \right)^{(x_2-1)-(y_2-1)} \left( \frac{\theta_K}{2+\theta_K} \right)^{y_2-1} \\
+			&= \left( \frac{\theta_K}{2+\theta_K} \right) x_2 
+		\end{align*}
+		Where the last equality follows from the summation being the CDF of a binomial distribution $ F(k;n,p)=\Prob(X\leq k ) =\sum_{i=0}^{\lfloor k\rfloor}\left(\begin{array}{c}{n} \\ {i}\end{array}\right) p^{n-i}(1-p)^{i} $ with $ n=x_2-1=k,\ i=y_2-1 $ and $ p=\frac{2}{2+\theta_K} $ over the entire space and is thus equal to one.
+		\[ Q(\theta|\theta_K,x) = \left( \left( \frac{\theta_K}{2+\theta_K} \right) x_2  +x_1+x_4 \right) log(\theta)+x_3log(1-2\theta) + C_4 \]
+	 \subsection*{M-Step}
+	 	Taking the first-order condition of $  Q(\theta|\theta_K,x) $ with respect to $ \theta $ and setting equal to zero so as to obtain $\theta_{k+1}=\underset{\theta}{\arg \max } Q\left(\theta | \theta_{K}, x_{o}\right)$ yields:
+	 	\begin{align*}
+	 		\frac{d Q(\theta|\theta_K,x) }{d \theta} &= \frac{ \left( \frac{\theta_K}{2+\theta_K} \right) x_2  +x_1+x_4 }{\theta^*} = \frac{x_3}{0.5-\theta^*}\\
+	 		&=  2\left[ \left( \frac{\theta_K}{2+\theta_K} \right) x_2  + x_1 + x_3 + x_4 \right]\\
+	 		&\RA \theta^* = \theta_{K+1} = \frac{  \left( \frac{\theta_K}{2+\theta_K} \right) x_2  +x_1+x_4 }{ 2\left[ \left( \frac{\theta_K}{2+\theta_K} \right) x_2  + x_1 + x_3 + x_4 \right] }
+	 	\end{align*}
+	 
+	 
+	%\lstlistoflistings
+	\subsection*{MATLAB Problems 1 and 2}
+	\subsubsection*{Output:}
+	\begin{Verbatim}[fontsize=\small]
+	--------------------------------------------------------------
+	Oscar Martinez 	 Homework 6: Problems 1 and 2 	 STA 5106
+	--------------------------------------------------------------
+	-----------Problem 1----------
+	
+	theta =
+	
+	Columns 1 through 5
+	
+	0.1000    0.2226    0.2369    0.2384    0.2385
+	
+	Columns 6 through 8
+	
+	0.2385    0.2385    0.2385
+	
+	-----------Problem 2----------
+	----------Dataset 1---------
+	
+	m =
+	
+	7
+	
+	mu = (0.023, 4.970), sigma = (0.914, 0.522), alpha = (0.324, 0.676) 
+	
+	----------Dataset 2---------
+	
+	m =
+	
+	29
+	
+	mu = (0.550, 2.818), sigma = (0.722, 0.700), alpha = (0.027, 0.973) 
+	\end{Verbatim}
+	
+	\subsubsection*{Figures:}
+	\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Fig1.png}
+		%\end{center}
+		%{ \hspace*{\fill} \\}
+		%\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Fig2.png}
+	\end{center}
+		\begin{center}
+		\adjustimage{max size={0.75\linewidth}{0.75\paperheight}}{Fig3.png}
+		%\end{center}
+		%{ \hspace*{\fill} \\}
+		%\begin{center}
+		%\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Fig2.png}
+	\end{center}
+	
+	
+
+	
+\subsubsection*{Code:}
+	\lstinputlisting[]{HW6.m}
+	
+	
+\section*{Problem 3}
+   \begin{Verbatim}[commandchars=\\\{\}]
+  {\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{o}{*}
+  \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot}
+  \PY{c+c1}{\PYZsh{}Problem 3}
+  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}Problem 3\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+  \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{100}
+  \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{52}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{]}
+  
+  \PY{c+c1}{\PYZsh{} EM procedure}
+  \PY{n}{theta} \PY{o}{=} \PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+  \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.1}
+  \PY{n}{nth} \PY{o}{=} \PY{p}{(}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+  \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+  \PY{k}{while} \PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{nth}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mf}{1e\PYZhy{}6}\PY{p}{)}\PY{p}{:}
+  \PY{n}{nth} \PY{o}{=} \PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+  \PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{theta}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+  \PY{n}{i} \PY{o}{=} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+  \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+  \end{Verbatim}
+  
+  \begin{Verbatim}[commandchars=\\\{\}]
+  ---Problem 3---
+  [1.00000000e-01 9.52562358e+01 2.01906463e+03 2.08465655e+03
+  2.08476161e+03 2.08476177e+03 2.08476177e+03 0.00000000e+00
+  0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00
+  0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00
+  0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00]
+  
+  \end{Verbatim}
+  
+  \begin{Verbatim}[commandchars=\\\{\}]
+  {\color{incolor}In [{\color{incolor} }]:} 
+  \end{Verbatim}
+ 
+	
+\end{document}

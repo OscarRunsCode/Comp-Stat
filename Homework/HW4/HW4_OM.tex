@@ -1,0 +1,611 @@
+\documentclass[12pt]{article}
+%%\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{bigfoot} % to allow verbatim in footnote
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{subcaption} 
+
+\usepackage[T1]{fontenc}
+% Nicer default font (+ math font) than Computer Modern for most use cases
+\usepackage{mathpazo}
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+	\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+% Set max figure width to be 80% of text width, for now hardcoded.
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+% Ensure that by default, figures have no caption (until we provide a
+% proper Figure object with a Caption API and a way to capture that
+% in the conversion process - todo).
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+
+\usepackage{adjustbox} % Used to constrain images to a maximum size 
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+	\def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics 
+% to support a larger range 
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+% normalem makes italics be italics, not underlines
+\usepackage{mathrsfs}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage{microtype}
+\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage{titlesec}
+\usepackage{xfrac}
+\usepackage{marginnote}
+%\usepackage [autostyle, english = american]{csquotes}
+%\MakeOuterQuote{"}
+\usepackage{filecontents}
+\usepackage{fancyvrb}
+
+
+
+\pagestyle{fancy}
+\rhead{Oscar Martinez}
+\lhead{STA 5106} 					%Insert subject
+\chead{HW 4} 					%Insert Title
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Lagr}{\mathcal{L}}
+\newcommand{\LRA}{\Leftrightarrow}
+\newcommand{\LA}{\Leftarrow}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\rsa}{\rightsquigarrow} 
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\at}{a_{t+1}}
+\newcommand{\ct}{c_{t+1}}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator{\Var}{\mathbb{V}}% expected value
+
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesubsubsection}{\roman{subsubsection}.)}
+
+ % Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+\definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+\definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+% commands and environments needed by pandoc snippets
+% extracted from the output of `pandoc -s`
+\providecommand{\tightlist}{%
+	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Additional commands for more recent versions of Pandoc
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+% Define a nice break command that doesn't care if a line doesn't already
+% exist.
+\def\br{\hspace*{\fill} \\* }
+% Math Jax compatibility definitions
+\def\gt{>}
+\def\lt{<}
+\let\Oldtex\TeX
+\let\Oldlatex\LaTeX
+\renewcommand{\TeX}{\textrm{\Oldtex}}
+\renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+% Document parameters
+% Document title
+ % Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+	\let\PY@ul=\relax \let\PY@tc=\relax%
+	\let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+	\PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+				\PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+% Exact colors from NB
+\definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+\definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy 
+% Setup hyperref package
+\hypersetup{
+	breaklinks=true,  % so long urls are correctly broken across lines
+	colorlinks=true,
+	urlcolor=urlcolor,
+	linkcolor=linkcolor,
+	citecolor=citecolor,
+}
+
+
+\begin{filecontents*}{HW4.m}
+	clc
+	clear 
+	
+	%Diary
+	dfile ='MATLAB_Output_OM.txt';
+	if exist(dfile, 'file') ; delete(dfile); end
+	diary(dfile)
+	diary on
+	diary MATLAB_Output_OM.txt
+	
+	%Introduction
+	fprintf('--------------------------------------------------------------\n');
+	fprintf('Oscar Martinez \t Homework 4: Problems 1-2 \t STA 5106\n');
+	fprintf('--------------------------------------------------------------\n');
+	
+	%-----Problem 1:-----
+	fprintf('-----Problem 1-----\n');
+	
+	%Load the data
+	load hw4_1_data.mat
+	
+	%size
+	[m,n] = size(X)
+	
+	%Part a
+	fprintf('---Part (a)---\n');
+	
+	for i = 1:m 
+	I = reshape(X(i,:),28,23); %Reshape column i of X into a 28x23 matrix
+	imagesc(I); %Takes the reshapen column/matrix and converts it to an image
+	colormap(gray); %The image's color scheme is grayscale
+	axis equal; %Equal Margins
+	title(['Data Image ', num2str(i)]) %Title
+	pause; %Wait until user presses a key to move on to the next image
+	end;
+	
+	%PCA
+	C = cov(X); %Variance Covariance
+	[U,S,V]=svd(C); %SVD decomposition w/ U = V being our matrix of interest
+	U1=U(:,1:3); %U1 is the first 3 columns of U ie 3 principal directions
+	%Z=X*U1; %Z is our typical transformation but is unused
+	
+	%1st three components 
+	for i = 1:3 
+	I = reshape(U1(:,i),28,23); %Reshape column i of U1 into a 28x23 matrix
+	imagesc(I); %Takes the reshapen column/matrix and converts it to an image
+	colormap(gray); %The image's color scheme is grayscale
+	axis equal; %Equal Margins
+	title(['First Three Principal Directions: Image ', num2str(i)]) %Title
+	pause; %Wait until user presses a key to move on to the next image
+	end
+	
+	%Part b
+	fprintf('---Part (b)---\n');
+	
+	%Show the projection of the first image
+	i=0; %start counter at 0
+	for d = [50 100] %Doing this for d=50 and d=100
+	i = i+1; %Update the counter by 1
+	Z(:,i) = U(:,1:d)*(X(1,:)*U(:,1:d))'; %Create a new matrix Z, whose ith column corresponds to the ith value of d as per the prompt
+	end
+	
+	d = [50 100];
+	for i = 1:size(Z, 2) %For i from 1 to the # of columns in Z (here 2)
+	I = reshape(Z(:,i),28,23); %Reshape column i of Z into a 28x23 matrix
+	imagesc(I); %Takes the reshapen column/matrix and converts it to an image
+	colormap(gray); %The image's color scheme is grayscale
+	axis equal; %Equal Margins
+	title(['(b) Projection Onto Subspace ', num2str(d(1,i))]) %Title
+	pause %Wait until user presses a key to move on to the next image
+	end 
+	
+	%-----Problem 1:-----
+	clear
+	fprintf('-----Problem 2-----\n');
+	
+	%Load the data
+	load hw4_2_data.mat
+	
+	%Relevant Details
+	% m = 5 classes
+	%k = 10 observations
+	%n = 3 size of vector per observation
+	%d = 1
+	
+	%Part a
+	fprintf('---Part (a)---\n');
+	
+	%Plot X
+	[n, m, k] = size(X);
+	figure(1);
+	color = 'brgcy';
+	for j = 1:m
+	for i = 1:k
+	plot3(X(1,j,i), X(2,j,i), X(3,j,i), [color(j) '*']);
+	%grid on;
+	title('Plot of X');
+	hold on;
+	end
+	end
+	
+	%Part b
+	fprintf('---Part (b)---\n');
+	
+	%Class Means
+	for i = 1:n
+	for j = 1:m
+	mu(i,j) = mean(X(i,j,:));
+	end
+	end
+	
+	%Total Mean
+	MU = mean(mu, 2); %column vector w/ mean of each row of mu
+	
+	%Between-class Scatter Matrix
+	S_B = zeros(n, n);
+	for j = 1:m
+	S_B = S_B + (mu(:,j) - MU)*(mu(:,j) - MU)';
+	end
+	
+	% compute within-class scatter matrix
+	S_W = zeros(n, n);
+	for j = 1:m
+	for i = 1:k
+	S_W = S_W + (X(:,j,i) - mu(:,j))*(X(:,j,i) - mu(:,j))';
+	end
+	end
+	
+	% compute U
+	[U, D] = eig(S_B, S_W);
+	U = U(:,n)  % take the last component (w.r.t. largest generalized eigenvalue)
+	
+	%Part c
+	fprintf('---Part (c)---\n');
+	
+	% projection to Z
+	for j = 1:m
+	for i = 1:k
+	Z(i,j) = U'*X(:,j,i);
+	end
+	end
+	
+	% plot Z
+	figure(2);
+	color = 'brgcy';
+	for j = 1:m
+	plot(Z(:,j), [color(j) 'o']);
+	title('Plot of Z');
+	hold on;
+	end
+	
+	%closing output
+	diary off
+\end{filecontents*}
+
+\let\ph\mlplaceholder % shorter macro
+\lstMakeShortInline"
+
+\lstset{
+	style              = Matlab-editor,
+	basicstyle         = \mlttfamily,
+	escapechar         = ",
+	mlshowsectionrules = true,
+}
+
+
+\begin{document}
+	
+	%\lstlistoflistings
+	\section*{MATLAB (Problems 1-2)}
+	\subsection*{Output:}
+	\begin{Verbatim}[fontsize=\small]
+	--------------------------------------------------------------
+	Oscar Martinez 	 Homework 4: Problems 1-2 	 STA 5106
+	--------------------------------------------------------------
+	-----Problem 1-----
+	m =
+	
+	200
+	
+	
+	n =
+	
+	644
+	
+	---Part (a)---
+	---Part (b)---
+	-----Problem 2
+	--------Part (a)---
+	---Part (b)---
+	
+	U =
+	
+	0.0144
+	0.0195
+	0.0169
+	
+	---Part (c)---
+	\end{Verbatim}
+	
+	\subsection*{Figures:}
+	\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{SIM1.png}
+		%\end{center}
+		%{ \hspace*{\fill} \\}
+		%\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{PCA1.png}
+	\end{center}
+	\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{PCA2.png}
+		%\end{center}
+		%{ \hspace*{\fill} \\}
+		%\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{PCA3.png}
+	\end{center}
+\begin{center}
+	\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Proj50.png}
+	%\end{center}
+	%{ \hspace*{\fill} \\}
+	%\begin{center}
+	\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Proj50.png}
+\end{center}
+	\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{XPlot.png}
+	%\end{center}
+	%{ \hspace*{\fill} \\}
+		%\begin{center}
+		\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{ZPlot.png}
+	\end{center}
+	%{ \hspace*{\fill} \\}
+	
+
+	
+\subsection*{Code:}
+	\lstinputlisting[]{HW4.m}
+	
+\section*{Problem 3}
+	In the LLE framework, we minimize the error for a point $ \vec{X} $ with $ K $ neighbors $ \vec{\eta_j} $ 
+	\[ \left| \vec{X}-\sum_{j=1}^{K}W_j \vec{\eta_j} \right|^2 = \left| \sum_{j=1}^{K}W_j \left( \vec{X} - \vec{\eta_j} \right)  \right|^2 = \sum_{jk} W_j W_k G_{jk}  \]
+	Where the Gram matrix
+	\[ G_{jk} = \left( \vec{X} - \vec{\eta_j} \right) \cdot \left( \vec{X} - \vec{\eta_k} \right) \]
+	Prove that the optimal reconstruction weights are
+	\[ W_j = \frac{ \sum_k [ G^{-1} ]_{jk} }{ \sum_{lm} [ G^{-1} ]_{lm} } \]
+	\begin{proof}
+		First, observe that:
+		\begin{align*}
+			\left| \underbrace{\vec{X}}_{D\times 1}-\sum_{j=1}^{K}\underbrace{W_j}_{1\times 1} \underbrace{\vec{\eta_j}}_{D\times 1} \right|^2 & = \left| \sum_{j=1}^{K}W_j \vec{X}-\sum_{j=1}^{K}W_j \vec{\eta_j} \right|^2\\
+			&= \left| \sum_{j=1}^{K}W_j \left( \vec{X} - \vec{\eta_j} \right)  \right|^2 \\
+			&=\left( \sum_{j=1}^{K}W_j \left( \vec{X} - \vec{\eta_j} \right)  \right)^T\left( \sum_{j=1}^{K}W_j \left( \vec{X} - \vec{\eta_j} \right)  \right) \\
+			&= \left( \sum_{j=1}^{K}W_j \vec{\epsilon_{j}}   \right)^T \left( \sum_{j=1}^{K}W_j \vec{\epsilon_{j}} \right), \quad \underbrace{\vec{\epsilon_{j}}}_{D\times 1}=  \left( \vec{X} - \vec{\eta_j} \right) \\
+			&= \left( W_1 \vec{\epsilon_{1}^T} + W_2 \vec{\epsilon_{2}^T}+\dots +W_K \vec{\epsilon_{K}^T}  \right)^T\left( W_1 \vec{\epsilon_{1}} + W_2 \vec{\epsilon_{2}}+\dots +W_K \vec{\epsilon_{K}}  \right)\\
+			&= \left( \underbrace{\begin{bmatrix}
+				W_1 & W_2 & \dots & W_K
+			\end{bmatrix}}_{1\times K} \underbrace{\begin{bmatrix}
+			\vec{\epsilon_{1}^T} \\ \vec{\epsilon_{2}^T} \\ \vdots \\ \vec{\epsilon_{K}^T}
+			\end{bmatrix}}_{K\times D} \right) 
+		\left( \underbrace{\begin{bmatrix}
+			\vec{\epsilon_{1}} & \vec{\epsilon_{2}} & \dots & \vec{\epsilon_{K}}
+			\end{bmatrix}}_{D\times K} \underbrace{\begin{bmatrix}
+			W_1 \\ W_2 \\ \vdots \\ W_K
+			\end{bmatrix}}_{K\times 1} \right)\\
+			&= \underbrace{\vec{W^T}}_{1\times K} \underbrace{G}_{K \times K} \underbrace{\vec{W}}_{K \times 1}, \quad G=\begin{bmatrix}
+			g_{1,1} & g_{1,2} & \dots & g_{1,K}\\
+			g_{2,1} & g_{2,2} & \dots & g_{2,K}\\
+			\vdots & \vdots & \ddots & \vdots \\
+			g_{K,1} & g_{K,2} & \dots & g_{K,K}\\
+			\end{bmatrix}, \quad \underbrace{g_{i,j}}_{1\times 1}=\vec{\epsilon_{i}^T}\vec{\epsilon_{j}}
+		\end{align*}
+		Now, we construct and solve our Lagrangian:
+		\begin{align*}
+			\Lagr &= \vec{W^T}G\vec{W} + \lambda(1-\vec{W^T} \mathbb{1})\\
+			\frac{\partial \Lagr}{\partial \vec{W^T}} &= 2G\vec{W} - \lambda \mathbb{1} = 0\\
+			&\RA  2G\vec{W} = \lambda \mathbb{1}\\
+			&\LRA \vec{W} = \frac{1}{2} G^{-1} \lambda \mathbb{1} \\
+			&\RA \begin{bmatrix}
+			W_1 \\ W_2 \\ \vdots \\ W_K
+			\end{bmatrix} = \frac{1}{2} \begin{bmatrix}
+			g_{1,1}^{-1} & g_{1,2}^{-1} & \dots & g_{1,K}^{-1}\\
+			g_{2,1}^{-1} & g_{2,2}^{-1} & \dots & g_{2,K}^{-1}\\
+			\vdots & \vdots & \ddots & \vdots \\
+			g_{K,1}^{-1} & g_{K,2}^{-1} & \dots & g_{K,K}^{-1}\\
+			\end{bmatrix} \begin{bmatrix}
+			\lambda \\ \lambda \\ \vdots \\ \lambda
+			\end{bmatrix}\\
+			&\LRA \begin{bmatrix}
+			W_1 \\ W_2 \\ \vdots \\ W_K
+			\end{bmatrix} = \frac{1}{2} \begin{bmatrix}
+			\lambda (g_{1,1}^{-1} + g_{1,2}^{-1} + \dots + g_{1,K}^{-1})\\
+			\lambda (g_{2,1}^{-1} + g_{2,2}^{-1} + \dots + g_{2,K}^{-1})\\
+			\vdots  \\
+			\lambda (g_{K,1}^{-1} + g_{K,2}^{-1} + \dots + g_{K,K}^{-1})\\
+			\end{bmatrix} \\
+			&\LRA W_j=\frac{1}{2}\lambda(g_{j,1}^{-1} + g_{j,2}^{-1} + \dots + g_{j,K}^{-1}) = \frac{1}{2}\lambda\sum_{k=1}^{K}[G^{-1}]_{jk}\\
+			&\RA \mathbb{1}^T W_j = \frac{1}{2}\lambda \mathbb{1}^T G^{-1} \mathbb{1}\\
+			&\RA \lambda = \frac{2}{\mathbb{1}^T G^{-1} \mathbb{1}}\\
+			&\RA  W_j = \frac{1}{2}\left( \frac{2}{\mathbb{1}^T G^{-1} \mathbb{1}} \right) G^{-1} \mathbb{1} = \frac{ \sum_k [ G^{-1} ]_{jk} }{ \sum_{lm} [ G^{-1} ]_{lm} }
+		\end{align*}
+	\end{proof}
+	
+	
+
+\end{document}

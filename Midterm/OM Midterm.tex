@@ -1,0 +1,263 @@
+\documentclass[12pt]{article}
+%%\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage{bigfoot} % to allow verbatim in footnote
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{subcaption} 
+
+\usepackage[T1]{fontenc}
+% Nicer default font (+ math font) than Computer Modern for most use cases
+\usepackage{mathpazo}
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+	\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+% Set max figure width to be 80% of text width, for now hardcoded.
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+% Ensure that by default, figures have no caption (until we provide a
+% proper Figure object with a Caption API and a way to capture that
+% in the conversion process - todo).
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+
+\usepackage{adjustbox} % Used to constrain images to a maximum size 
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+	\def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+
+% redefine \VerbatimInput
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
+{fontsize=\footnotesize}
+
+\usepackage{grffile} % extends the file name processing of package graphics 
+% to support a larger range 
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+% normalem makes italics be italics, not underlines
+\usepackage{mathrsfs}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage{microtype}
+\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage{titlesec}
+\usepackage{xfrac}
+\usepackage{marginnote}
+%\usepackage [autostyle, english = american]{csquotes}
+%\MakeOuterQuote{"}
+\usepackage{filecontents}
+
+\usepackage[affil-it]{authblk}
+
+
+
+\pagestyle{fancy}
+\rhead{Oscar Martinez}
+\lhead{STA 5106} 					%Insert subject
+\chead{Midterm Project} 					%Insert Title
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Lagr}{\mathcal{L}}
+\newcommand{\LRA}{\Leftrightarrow}
+\newcommand{\LA}{\Leftarrow}
+\newcommand{\RA}{\Rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\rsa}{\rightsquigarrow} 
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand{\at}{a_{t+1}}
+\newcommand{\ct}{c_{t+1}}
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator{\Var}{\mathbb{V}}% expected value
+
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand{\thesubsubsection}{\roman{subsubsection}.)}
+
+
+\let\ph\mlplaceholder % shorter macro
+\lstMakeShortInline"
+
+\lstset{
+	style              = Matlab-editor,
+	basicstyle         = \mlttfamily,
+	escapechar         = ",
+	mlshowsectionrules = true,
+}
+
+
+
+\begin{document}
+	
+		
+	
+	\title{ \Huge Midterm Project}
+	\author{\large Oscar Martinez}
+	\affil{Florida State University\\ Department of Statistics\\ Instructor: Dr. Wei Wu}
+	\date{October 24, 2019}	
+	
+	
+	\pagenumbering{gobble}
+	\maketitle
+	\newpage
+	\pagenumbering{arabic}
+	
+\section{Problem Statement}
+	
+	Identification and classification of objects in images is a task that is arguably as old as images themselves. Identification and classification of these objects has traditionally been done by humans, however this method requires both time and workers and still allows for mistakes which are costly and difficult catch. The problem of identification is essentially this:  ``given an image (or multiple images) of a particular scene, the goal is to detect and identify objects of interest in that image(s).'' \footnote{Florida State University. Course: STA 5106. Midterm Prompt. Fall 2019} Video surveillance, monitoring of dyed cell cultures, examination of medical imaging, geospatial mapping, and other areas would benefit from computer-aided image identification. 
+	
+	In this project, we seek to identify and classify images which consist of people's facial profiles. The figures in section 1.(a) illustrate examples of the images we will be dealing with:
+	
+	\subsection{Image Examples}
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Train1.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Train25.png}
+		\end{center}
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Train105.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Train196.png}
+		\end{center}
+	
+	The goal of the problem is to match each image with the individual whose facial profile is the basis of the image. 
+	The rest of the paper is organized as follows: Section 2. details the methodology of the analysis, Section 3. presents the code used to perform this analysis, Section 4. presents the results in terms of accuracy of the analysis as well as provides examples of when our methodology was correct versus incorrect, and Section 5. concludes. 
+	
+\section{Methodology and Approach}
+
+	\subsection{Background}
+	Due to the inherent high-dimensionality of images, image analysis can be costly in terms of computational power needed. Thus, it is often beneficial to reduce their dimensionality before proceeding with the analysis. This reduction presents a trade-off between efficiency and accuracy; higher dimensionality is generally more accurate but also more computationally expensive (more inefficient). Several ways to reduce dimensionality while maintaining accuracy have been developed and implemented such as principal component analysis (PCA) and linear discriminant analysis (LDA) among other methods.
+   
+   In this paper, we analyze the trade-offs between dimensionality and accuracy for PCA as compared to a  simple projection for dimension reduction. In essence, PCA is used to transform data $ \mathbf{X} $ with corresponding dimension $ N $ into a subspace $ \mathbf{Y} $ with corresponding dimension $ K $, where $ K $ is generally less than $ N $, while keeping as much as possible of the variation in the data. It does so by identifying a new set of uncorrelated variables called the principal components (PC) which are ordered such that each subsequent PC has less variation than the previous component.\footnote{Jolliffe, Ian. Principal component analysis. Springer Berlin Heidelberg, 2011.} Thus, high-dimension data can be represented by lower-dimension data while maintaining the majority of variation. This allows for similarities and differences among the data to be more efficiently analyzed in comparison to using  a simple projection of the original data onto a lower subspace.
+   
+   
+   \subsection{Data Structure}
+   In this project, there are two sets of data, $ Y_{train} $ and $ Y_{test} $ of which $ Y_{train} $ have implicitly already been identified for the desired object. That is, that the person whose facial profile composes the image is known. In contrast, $ Y_{train} $ is implicitly unknown. The use of implicit is because the two sets of data have the same structure and the persons whose facial profiles compose the images are already known, however the project proceeds as if we didn't know this information for $ Y_{test} $ and only makes use of this information when evaluating the accuracy of the two methods.
+   
+   The sets of data $ Y_{train} $ and $ Y_{test} $ are both $ 644 \times 200 $ matrices with each image corresponding to a column of the matrix. Each image has resolution (size) of $ 28 \times 23 $ and the first five columns (images) of the sets of data correspond to the same person, the second set of five columns (images) to the second person, and so on for a total of forty different individuals. Thus, there are a total of $ n_1 = 5 $ different images for each of $ n_2=40 $ different individuals with each image being of size $ s_1\times s_2 = 28\times 23 = 644$. 
+   
+   \subsection{Feature Extraction}
+   The images of $ Y_{train} $ are training images and are projected onto their principal $ K $-dimensional subspace. The test images in $ Y_{test} $ are also projected onto their $ K $-dimensional subspace and are then compared with the training images. For comparison, a simple projection of both sets of data is used and compared. 
+   
+   \subsubsection{PCA Algorithm}
+   The PCA algorithm employed in this analysis is as follows:\footnote{Florida Statue University. Course: STA 5106. Lecture 05. Fall 2019}
+   \begin{enumerate}
+   	\item Find the sample covariance matrix $ C\in \Real^{(s_1\times s_2)\times (n_1\times n_2)} $ of the elements of $ Y_{train} $. 
+   	\item Compute the singular value decomposition (SVD) of $ C $ to obtain the orthogonal matrix $ U \in \Real^{(s_1\times s_2)\times (n_1\times n_2) } $.
+   	\item Let $ U_{1} $ be the first $ K $ columns of $ U $ so that $ U_{1}\in\Real^{ (s_1\times s_2)\times K } $. 
+   	\item Each image in $ Y_{train} $ can now be reduced to a $ K $-dimensional vector using the projection $ Y_{1} = U_{1}^T Y_{train} $ so that $ Y_{1} \in \Real^{ (s_1\times s_2)\times K } $.
+   \end{enumerate}
+
+	\subsubsection{Simple Projection}
+	The simple projection algorithm is similar to the PCA algorithm except that $ U_{1} $ is just the first $ K $ columns of the $ (s_1 \times s_2) $ identity matrix. 
+	
+	\subsection{Classification}
+	Taking one image (column) $ I $ from $ Y_{test} $\footnote{Florida State University. Course: STA 5106. Midterm Prompt. Fall 2019}
+	\begin{enumerate}
+		\item Compute the projection of I using $ I_1 = U_1^T I $ so that $ I_1\in \Real^{K \times 1} $.
+		\item Compute the distance between $ I_1 $ and each column of $ Y_1 = U_{1}^T Y_{train} $ using the 2-norm.
+		\item Find the nearest neighbor by finding the label of the column that has the smallest distance to $ I_1 $.
+		\item Gauge accuracy by determining whether the label in the previous step is correct and finding the fraction of correct labels to total labels. 
+	\end{enumerate}
+	
+	The above algorithms were for $ K=1, K=2, ..., K=40 $.
+   
+   
+	
+\section{MATLAB Programs}
+	
+	The code was compiled in Matlab version R2018b. The code, as it was compiled is given below:
+	
+	\subsection{Code:}
+	\lstinputlisting[]{Midterm_OM.m}
+	
+\section{Results}
+	
+	The accuracy is given by the MATLAB output of the table below and graphed by the image above it. While for $ K=1 $, the simple projection procedure was more accurate, for any $ K \geq 2 $, the PCA procedure was more accurate. While the simple projection seemed to increase linearly, the PCA procedure increased sharply until about $ K=9 $ and then increased only gradually after that until apparently converging at an accuracy rate of 87.5\%. In contrast, the simple projection reached only 63.5\% accuracy with $ K=40 $. 
+	
+	The graph's horizontal axis denotes the dimension, $ K $, and the vertical axis denotes the accuracy. On this axis, $ 1=100\% $ accuracy, $ 0.5=50\% $ accuracy and so on. the table and graph help illustrate the gain in accuracy that is brought on by PCA as compared to simple projections for lower-dimensional analysis. 
+	
+	\subsection{Figures:}
+	\subsubsection{Accuracy}
+	\begin{center}
+		\adjustimage{max size={0.75\linewidth}{0.75\paperheight}}{Fig2.png}
+	\end{center}
+	
+	\begin{center}
+		\VerbatimInput{MATLAB_Output_OM.txt}
+	\end{center}
+
+	\subsubsection{Correct PCA Examples}
+	To illustrate the power of PCA, below are some examples of the images for which PCA was correct. For these images, PCA was correct and simple projection may have been correct or may have been wrong. The technique was correct if the image identified by the techniques belonged to the individual whose facial profile was presented in the test image. For example, if $ Test=7 $ a correct identification would have been $ 6,7,8,9,\ or\ 10 $. For each figure, which is composed of three images, the full image in $ Y_{test} $ is shown furthest to the left, the middle image is the image identified by PCA to be the closest, or most similar to the test image, and the right-most image is the image chosen by the simple projection technique to be the most similar. The numbers next to PCA or SP denote which image was identified as being the ``closest''.
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Corr1.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Corr2.png}
+		\end{center}
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Corr3.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Corr4.png}
+		\end{center}
+
+	\subsubsection{Incorrect PCA Examples}
+	These are examples where PCA was wrong and simple projection may be right or may be wrong. Facial hair as well as face orientation seem to be difficult for PCA to match. Despite this difficulty, there is a definite similarity between the image chosen by PCA and the test image. 
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Wrong1.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Wrong2.png}
+		\end{center}
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Wrong3.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{Wrong4.png}
+		\end{center}
+
+	\subsubsection{Examples Where Simple Projection was Correct but PCA Was Not}
+	Lastly, here are examples where PCA was wrong and simple projection was correct. 
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{SP1.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{SP2.png}
+		\end{center}
+		\begin{center}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{SP3.png}
+			\adjustimage{max size={0.45\linewidth}{0.45\paperheight}}{SP4.png}
+		\end{center}
+	
+\section{Conclusion}
+	Both projections are surprisingly accurate given that over 60\% accuracy was attained by 40/644 $ \approx 0.0621 = 6.21\% $ of the dimension of the data. For any $ K $ greater than 1, PCA outperformed the simple projection. For lower values of $ K $, PCA seemed to have greater variation regarding accuracy compared to the simple projection. As $ K $ increased, the variation in accuracy for PCA appeared to be lower than the corresponding variation in accuracy for the simple projection. The difference in accuracy between PCA and the simple projection reached its maximum at $ K=9 $, with a difference of 42\% accuracy. Afterwards, the difference steadily decreased but did not equal zero for any of the values of $ K $ used in this analysis. Conclusively, PCA offers notable gains in efficiency without sacrificing too much accuracy. 
+	
+	
+	
+\end{document}
